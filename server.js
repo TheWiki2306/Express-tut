@@ -4,10 +4,12 @@ import posts from './routes/post.js';
 import logger from './middleWare/logger.js';
 import errorhandler from './middleWare/error.js';
 import notFound from './middleWare/notFound.js';
+import cors from 'cors';
 const port = process.env.PORT || 8000;
 
 
 const app = express();
+app.use(cors());
 
 // Body parser middleware
 app.use(express.json());
@@ -18,6 +20,11 @@ app.use(logger);
 
 // Routes
 app.use('/api/posts', posts);
+
+app.listen(80, function () {
+    console.log('CORS-enabled web server listening on port 80');
+    
+})
 
 // not found middleware
 app.use(notFound);
